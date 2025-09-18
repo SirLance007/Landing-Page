@@ -1,12 +1,9 @@
-function About() {
+import React from 'react'
+
+const About = () => {
   return (
-    <section className="container">
-      <h1>About</h1>
-      <p>This is a sample About page to demonstrate routing.</p>
-    </section>
+    <div>About</div>
   )
 }
 
 export default About
-
-

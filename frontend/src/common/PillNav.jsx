@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import React,{ useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { gsap } from 'gsap';
 import './PillNav.css';
@@ -8,12 +8,15 @@ const PillNav = ({
   activeHref,
   className = '',
   ease = 'power3.easeOut',
-  baseColor = '#fff',
-  pillColor = '#060010',
-  hoveredPillTextColor = '#060010',
+  baseColor = '#0b0a11',
+  pillColor = '#1a152a',
+  hoveredPillTextColor = '#ffffff',
   pillTextColor,
   onMobileMenuClick,
-  initialLoadAnimation = true
+  initialLoadAnimation = true,
+  logo,
+  logoAlt = 'Logo',
+  brand = 'React Bits'
 }) => {
   const resolvedPillTextColor = pillTextColor ?? baseColor;
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -125,7 +128,7 @@ const PillNav = ({
     });
   };
 
-  // logo removed
+  // render logo and brand on the left
 
   const toggleMobileMenu = () => {
     const newState = !isMobileMenuOpen;
@@ -198,7 +201,16 @@ const PillNav = ({
   return (
     <div className="pill-nav-container">
       <nav className={`pill-nav ${className}`} aria-label="Primary" style={cssVars}>
-        <div className="pill-nav-items desktop-only" ref={navItemsRef}>
+        <div className="nav-shell">
+          <div className="brand-group">
+            {logo ? (
+              <span className="pill-logo" aria-hidden="true">
+                <img src={logo} alt={logoAlt} />
+              </span>
+            ) : null}
+            <span className="brand-title">{brand}</span>
+          </div>
+          <div className="pill-nav-items desktop-only" ref={navItemsRef}>
           <ul className="pill-list" role="menubar">
             {items.map((item, i) => (
               <li key={item.href || `item-${i}`} role="none">
@@ -252,6 +264,7 @@ const PillNav = ({
               </li>
             ))}
           </ul>
+          </div>
         </div>
 
         <button

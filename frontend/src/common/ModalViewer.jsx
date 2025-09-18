@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable react/no-unknown-property */
-import { Suspense, useRef, useLayoutEffect, useEffect, useMemo } from 'react';
+import React,{ Suspense, useRef, useLayoutEffect, useEffect, useMemo } from 'react';
 import { Canvas, useFrame, useLoader, useThree, invalidate } from '@react-three/fiber';
 import { OrbitControls, useGLTF, useFBX, useProgress, Html, Environment, ContactShadows } from '@react-three/drei';
 import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader';
@@ -22,7 +22,7 @@ const Loader = ({ placeholderSrc }) => {
   return (
     <Html center>
       {placeholderSrc ? (
-        <img src={placeholderSrc} width={128} height={128} style={{ filter: 'blur(8px)', borderRadius: 8 }} />
+        <img src={placeholderSrc} width={128} height={128} className="blur-lg rounded-lg" />
       ) : (
         `${Math.round(progress)} %`
       )}
@@ -395,23 +395,14 @@ const ModelViewer = ({
       style={{
         width,
         height,
-        touchAction: 'pan-y pinch-zoom',
-        position: 'relative'
+        touchAction: 'pan-y pinch-zoom'
       }}
+      className="relative"
     >
       {showScreenshotButton && (
         <button
           onClick={capture}
-          style={{
-            position: 'absolute',
-            border: '1px solid #fff',
-            right: 16,
-            top: 16,
-            zIndex: 10,
-            cursor: 'pointer',
-            padding: '8px 16px',
-            borderRadius: 10
-          }}
+          className="absolute top-4 right-4 z-10 cursor-pointer px-4 py-2 border border-white rounded-xl bg-transparent text-white hover:bg-white hover:text-black transition-colors"
         >
           Take Screenshot
         </button>
